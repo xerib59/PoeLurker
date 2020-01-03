@@ -1,0 +1,2 @@
+﻿WAIT_MESSAGE=I'm busy right now I'll send you a party invite asap !
+THX_MESSAGE=Thanks Exile, conquer the world with this awesome item !

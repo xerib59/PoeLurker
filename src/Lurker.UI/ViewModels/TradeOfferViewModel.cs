@@ -19,6 +19,7 @@ namespace Lurker.UI.ViewModels
         private bool _Waiting;
         private TradeEvent _tradeEvent;
         private PoeKeyboardHelper _keyboardHelper;
+        private MessagesHelper _messagesHelper;
         private OfferStatus _status;
         private Action<TradeOfferViewModel> _removeAction;
         private bool _skipAction;
@@ -31,11 +32,12 @@ namespace Lurker.UI.ViewModels
         /// Initializes a new instance of the <see cref="TradeOfferViewModel"/> class.
         /// </summary>
         /// <param name="tradeEvent">The trade event.</param>
-        public TradeOfferViewModel(TradeEvent tradeEvent, PoeKeyboardHelper keyboardHelper, Action<TradeOfferViewModel> removeAction)
+        public TradeOfferViewModel(TradeEvent tradeEvent, PoeKeyboardHelper keyboardHelper, MessagesHelper messagesHelper, Action<TradeOfferViewModel> removeAction)
         {
             this._tradeEvent = tradeEvent;
             this._keyboardHelper = keyboardHelper;
             this._removeAction = removeAction;
+            this._messagesHelper = messagesHelper;
         }
 
         #endregion
@@ -114,15 +116,15 @@ namespace Lurker.UI.ViewModels
             this._removeAction(this);
         }
 
-        /// <summary>
-        /// Waits this instance.
-        /// </summary>
-        public void Wait()
-        {
-            this._skipAction = true;
-            this.Waiting = true;
-            this._keyboardHelper.Whisper(this.PlayerName, "I'm busy right now I'll send you a party invite.");
-        }
+		/// <summary>
+		/// Waits this instance.
+		/// </summary>
+		public void Wait()
+		{
+			this._skipAction = true;
+			this.Waiting = true;
+			this._keyboardHelper.Whisper(this.PlayerName, _messagesHelper.WaitMessage());
+		}
 
         /// <summary>
         /// Answers this instance.

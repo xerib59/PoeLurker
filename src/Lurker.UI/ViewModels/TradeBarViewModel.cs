@@ -29,6 +29,7 @@ namespace Lurker.UI.ViewModels
         private ClientLurker _Lurker;
         private DockingHelper _dockingHelper;
         private PoeKeyboardHelper _keyboardHelper;
+        private MessagesHelper _messagesHelper;
 
         #endregion
 
@@ -40,11 +41,12 @@ namespace Lurker.UI.ViewModels
         /// <param name="lurker">The lurker.</param>
         /// <param name="dockingHelper">The docking helper.</param>
         /// <param name="keyboardHelper">The keyboard helper.</param>
-        public TradeBarViewModel(ClientLurker lurker, DockingHelper dockingHelper, PoeKeyboardHelper keyboardHelper)
+        public TradeBarViewModel(ClientLurker lurker, DockingHelper dockingHelper, PoeKeyboardHelper keyboardHelper, MessagesHelper messagesHelper)
         {
             this._Lurker = lurker;
             this._dockingHelper = dockingHelper;
             this._keyboardHelper = keyboardHelper;
+            this._messagesHelper = messagesHelper;
             this.TradeOffers = new ObservableCollection<TradeOfferViewModel>();
 
             this._dockingHelper.OnWindowMove += this.DockingHelper_OnWindowMove;
@@ -86,7 +88,7 @@ namespace Lurker.UI.ViewModels
         {
             Execute.OnUIThread(() => 
             {
-                this.TradeOffers.Add(new TradeOfferViewModel(e, this._keyboardHelper, this.RemoveOffer));
+                this.TradeOffers.Add(new TradeOfferViewModel(e, this._keyboardHelper, this._messagesHelper, this.RemoveOffer));
                 this.SortOffer();
             });
         }
@@ -102,6 +104,7 @@ namespace Lurker.UI.ViewModels
             if (offer != null)
             {
                 this._keyboardHelper.Kick(offer.PlayerName);
+                this._keyboardHelper.Whisper(offer.PlayerName, _messagesHelper.ThxMessage());
                 this.RemoveOffer(offer);
             }
         }

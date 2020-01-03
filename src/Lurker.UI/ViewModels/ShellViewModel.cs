@@ -127,9 +127,11 @@ namespace Lurker.UI
             {
                 var dockingHelper = new DockingHelper(process);
                 var keyboarHelper = new PoeKeyboardHelper(process);
+                var messagesHelper = new MessagesHelper();
                 this._container.RegisterInstance(typeof(ClientLurker), null, this._currentLurker);
                 this._container.RegisterInstance(typeof(DockingHelper), null, dockingHelper);
                 this._container.RegisterInstance(typeof(PoeKeyboardHelper), null, keyboarHelper);
+                this._container.RegisterInstance(typeof(MessagesHelper), null, messagesHelper);
 
                 this._tradeBarOverlay = this._container.GetInstance<TradeBarViewModel>();
                 this._windowManager.ShowWindow(this._tradeBarOverlay);

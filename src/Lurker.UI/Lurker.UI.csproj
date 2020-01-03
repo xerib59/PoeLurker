@@ -89,6 +89,7 @@
     <Compile Include="Converters\CurrencyTypeConverter.cs" />
     <Compile Include="Helpers\DockingHelper.cs" />
     <Compile Include="Helpers\KeyboardHelper.cs" />
+    <Compile Include="Helpers\MessagesHelper.cs" />
     <Compile Include="Helpers\PoeKeyboardHelper.cs" />
     <Compile Include="Native.cs" />
     <Compile Include="ViewModels\OfferStatus.cs" />
